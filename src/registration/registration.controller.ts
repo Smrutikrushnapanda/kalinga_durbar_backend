@@ -35,7 +35,11 @@ export class RegistrationController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Submit a new event registration' })
   @ApiBody({ type: CreateRegistrationDto })
-  @ApiResponse({ status: 201, description: 'Registration created', type: Registration })
+  @ApiResponse({
+    status: 201,
+    description: 'Registration created',
+    type: Registration,
+  })
   @ApiResponse({ status: 400, description: 'Validation failed' })
   @ApiResponse({ status: 409, description: 'Email already registered' })
   async create(@Body() dto: CreateRegistrationDto): Promise<Registration> {
@@ -46,7 +50,11 @@ export class RegistrationController {
 
   @Get()
   @ApiOperation({ summary: 'Get all registrations' })
-  @ApiResponse({ status: 200, description: 'List of all registrations', type: [Registration] })
+  @ApiResponse({
+    status: 200,
+    description: 'List of all registrations',
+    type: [Registration],
+  })
   async findAll(): Promise<Registration[]> {
     return this.registrationService.findAll();
   }
@@ -57,7 +65,8 @@ export class RegistrationController {
   @ApiOperation({ summary: 'Get registration statistics' })
   @ApiResponse({
     status: 200,
-    description: 'Stats: total, confirmed, pending, by type, accompanying count',
+    description:
+      'Stats: total, confirmed, pending, by type, accompanying count',
   })
   async getStats() {
     return this.registrationService.getStats();
@@ -68,7 +77,11 @@ export class RegistrationController {
   @Get('qr/:token')
   @ApiOperation({ summary: 'Get registration by QR token' })
   @ApiParam({ name: 'token', description: 'QR token e.g. KD2026-ABCD1234' })
-  @ApiResponse({ status: 200, description: 'Registration found', type: Registration })
+  @ApiResponse({
+    status: 200,
+    description: 'Registration found',
+    type: Registration,
+  })
   @ApiResponse({ status: 404, description: 'Not found' })
   async findByQr(@Param('token') token: string): Promise<Registration> {
     return this.registrationService.findByQrToken(token);
@@ -79,7 +92,11 @@ export class RegistrationController {
   @Get('email/:email')
   @ApiOperation({ summary: 'Get registration by email' })
   @ApiParam({ name: 'email', description: 'Registrant email' })
-  @ApiResponse({ status: 200, description: 'Registration found', type: Registration })
+  @ApiResponse({
+    status: 200,
+    description: 'Registration found',
+    type: Registration,
+  })
   @ApiResponse({ status: 404, description: 'Not found' })
   async findByEmail(@Param('email') email: string): Promise<Registration> {
     return this.registrationService.findByEmail(email);
@@ -90,7 +107,11 @@ export class RegistrationController {
   @Get(':id')
   @ApiOperation({ summary: 'Get registration by ID' })
   @ApiParam({ name: 'id', description: 'UUID' })
-  @ApiResponse({ status: 200, description: 'Registration found', type: Registration })
+  @ApiResponse({
+    status: 200,
+    description: 'Registration found',
+    type: Registration,
+  })
   @ApiResponse({ status: 404, description: 'Not found' })
   async findOne(@Param('id', ParseUUIDPipe) id: string): Promise<Registration> {
     return this.registrationService.findOne(id);

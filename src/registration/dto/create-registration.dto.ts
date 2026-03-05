@@ -10,6 +10,7 @@ import {
   Max,
   ValidateNested,
   IsNumber,
+  Matches,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
@@ -18,7 +19,10 @@ import { AccompanyingPersonDto } from './accompanying-person.dto';
 export class CreateRegistrationDto {
   // ── Basic Info ──────────────────────────────────────────────────────────
 
-  @ApiProperty({ example: 'John Doe', description: 'Full name as per ID proof' })
+  @ApiProperty({
+    example: 'John Doe',
+    description: 'Full name as per ID proof',
+  })
   @IsString()
   @IsNotEmpty()
   fullName!: string;
@@ -26,12 +30,22 @@ export class CreateRegistrationDto {
   @ApiProperty({ example: '+91 9876543210' })
   @IsString()
   @IsNotEmpty()
+  @Matches(/^[0-9]{10}$/)
   mobile!: string;
 
   @ApiProperty({ example: 'john@example.com' })
   @IsEmail()
   @IsNotEmpty()
   email!: string;
+
+  @ApiProperty({
+    example: '123456789012',
+    description: '12-digit Aadhaar number',
+  })
+  @IsString()
+  @IsNotEmpty()
+  @Matches(/^[0-9]{12}$/)
+  aadhar!: string;
 
   @ApiProperty({ example: '41 Club Bhubaneswar' })
   @IsString()
@@ -63,7 +77,11 @@ export class CreateRegistrationDto {
   @IsNotEmpty()
   registrationType!: string;
 
-  @ApiProperty({ example: 2, description: 'Number of accompanying persons (0–5)', default: 0 })
+  @ApiProperty({
+    example: 2,
+    description: 'Number of accompanying persons (0–5)',
+    default: 0,
+  })
   @IsInt()
   @Min(0)
   @Max(5)
@@ -95,7 +113,11 @@ export class CreateRegistrationDto {
   @IsOptional()
   flightDetails?: string;
 
-  @ApiProperty({ example: 'Veg', description: 'Veg | Non-Veg | Jain | Other', required: false })
+  @ApiProperty({
+    example: 'Veg',
+    description: 'Veg | Non-Veg | Jain | Other',
+    required: false,
+  })
   @IsString()
   @IsOptional()
   dietary?: string;
@@ -111,7 +133,11 @@ export class CreateRegistrationDto {
   @IsOptional()
   preTours?: string[];
 
-  @ApiProperty({ example: 43000, description: 'Total calculated amount', required: false })
+  @ApiProperty({
+    example: 43000,
+    description: 'Total calculated amount',
+    required: false,
+  })
   @IsNumber()
   @IsOptional()
   totalAmount?: number;

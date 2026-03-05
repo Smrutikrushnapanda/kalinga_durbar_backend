@@ -21,4 +21,9 @@ export class AccompanyingPersonDto {
   @IsString()
   @IsNotEmpty()
   gender!: string;
+
+  @ApiProperty({ example: 'spouse', required: false })
+  @IsString()
+  @IsOptional()
+  relation?: string;
 }

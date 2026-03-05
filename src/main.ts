@@ -8,7 +8,7 @@ async function bootstrap() {
 
   // ── CORS ──────────────────────────────────────────────────────────────────
   app.enableCors({
-    origin: '*', 
+    origin: '*',
     methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
@@ -16,7 +16,7 @@ async function bootstrap() {
   // ── Global validation pipe ────────────────────────────────────────────────
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true,       
+      whitelist: true,
       forbidNonWhitelisted: false,
       transform: true,
       transformOptions: { enableImplicitConversion: true },
@@ -28,7 +28,7 @@ async function bootstrap() {
     .setTitle('Kalinga Durbar – NAGM 2026 API')
     .setDescription(
       'Event registration API for NAGM 2026, Bhubaneswar. ' +
-      '18th–20th September · 41 India · Association of 41 Clubs · Tangent India',
+        '18th–20th September · 41 India · Association of 41 Clubs · Tangent India',
     )
     .setVersion('1.0')
     .addTag('registrations', 'Event registration endpoints')

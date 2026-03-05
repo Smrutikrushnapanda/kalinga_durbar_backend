@@ -31,7 +31,17 @@ export class AccompanyingPerson {
   @Column({ type: 'varchar', length: 20 })
   gender!: string;
 
-  @ManyToOne(() => Registration, (reg) => reg.accompanyingPersons, { onDelete: 'CASCADE' })
+  @ApiProperty({
+    example: 'spouse',
+    description: 'Relation to primary registrant',
+    required: false,
+  })
+  @Column({ name: 'relation', type: 'varchar', length: 50, nullable: true })
+  relation?: string;
+
+  @ManyToOne(() => Registration, (reg) => reg.accompanyingPersons, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'registration_id' })
   registration!: Registration;
 
