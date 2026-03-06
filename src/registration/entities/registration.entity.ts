@@ -62,9 +62,21 @@ export class Registration {
   @Column({ name: 'aadhar', type: 'varchar', length: 12, nullable: true })
   aadhar!: string;
 
-  @ApiProperty({ example: '41 Club Bhubaneswar' })
-  @Column({ name: 'organization', type: 'varchar', length: 255 })
-  organization!: string;
+  @ApiProperty({
+    example: '41 Club Bhubaneswar',
+    required: false,
+    deprecated: true,
+  })
+  @Column({ name: 'organization', type: 'varchar', length: 255, nullable: true })
+  organization?: string;
+
+  @ApiProperty({ example: '41', required: false })
+  @Column({ name: 'club_number', type: 'varchar', length: 20, nullable: true })
+  clubNumber?: string;
+
+  @ApiProperty({ example: '12', required: false })
+  @Column({ name: 'area_number', type: 'varchar', length: 20, nullable: true })
+  areaNumber?: string;
 
   @ApiProperty({ example: 'Bhubaneswar' })
   @Column({ type: 'varchar', length: 100 })
@@ -75,8 +87,8 @@ export class Registration {
   state!: string;
 
   @ApiProperty({ enum: Gender, example: Gender.MALE })
-  @Column({ type: 'varchar', length: 20 })
-  gender!: string;
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  gender?: string;
 
   // ── Event Info ────────────────────────────────────────────────────────────
 

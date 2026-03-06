@@ -28,8 +28,8 @@ export class AccompanyingPerson {
   phone?: string;
 
   @ApiProperty({ example: 'male', description: 'Gender' })
-  @Column({ type: 'varchar', length: 20 })
-  gender!: string;
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  gender?: string;
 
   @ApiProperty({
     example: 'spouse',

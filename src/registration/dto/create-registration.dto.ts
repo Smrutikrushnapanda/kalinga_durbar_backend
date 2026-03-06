@@ -47,10 +47,17 @@ export class CreateRegistrationDto {
   @Matches(/^[0-9]{12}$/)
   aadhar!: string;
 
-  @ApiProperty({ example: '41 Club Bhubaneswar' })
+  @ApiProperty({ example: '41', description: 'Club number' })
   @IsString()
   @IsNotEmpty()
-  organization!: string;
+  @Matches(/^[0-9]+$/)
+  clubNumber!: string;
+
+  @ApiProperty({ example: '12', description: 'Area number' })
+  @IsString()
+  @IsNotEmpty()
+  @Matches(/^[0-9]+$/)
+  areaNumber!: string;
 
   @ApiProperty({ example: 'Bhubaneswar' })
   @IsString()
@@ -62,10 +69,14 @@ export class CreateRegistrationDto {
   @IsNotEmpty()
   state!: string;
 
-  @ApiProperty({ example: 'male', description: 'male | female | other' })
+  @ApiProperty({
+    example: 'male',
+    description: 'male | female | other',
+    required: false,
+  })
   @IsString()
-  @IsNotEmpty()
-  gender!: string;
+  @IsOptional()
+  gender?: string;
 
   // ── Event Info ──────────────────────────────────────────────────────────
 
